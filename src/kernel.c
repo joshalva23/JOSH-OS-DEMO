@@ -75,7 +75,7 @@ void kernel_main()
 {
     
     terminal_initialize();
-    print("Hello World\ntest");
+    print("hello world\ntest");
     
     kheap_init(); //Heap Initialize
 
@@ -104,6 +104,6 @@ void kernel_main()
     diskstreamer_read(stream, &c, 1);
     while(1)
     {
-        
+
     }
 }

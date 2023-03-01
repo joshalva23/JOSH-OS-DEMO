@@ -13,7 +13,14 @@ struct disk
 {
     JOSHOS_DISK_TYPE type;
     int sector_size;
+
+    //the id of the disk
+    int id; 
+
     struct filesystem* filesystem;
+
+    //the private data of out filesystem
+    void* fs_private;
 };
 
 void disk_search_and_init();

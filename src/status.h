@@ -6,5 +6,6 @@
 #define EINVARG 2
 #define ENOMEN 3
 #define EBADPATH 4
+#define EFSNOTUS 5
 
 #endif

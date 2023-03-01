@@ -4,11 +4,8 @@
 #include "disk/disk.h"
 #include "disk/streamer.h"
 #include <stdint.h>
-<<<<<<< HEAD
-=======
 #include "memory/memory.h"
 #include "memory/heap/kheap.h"
->>>>>>> tmp
 
 #define JOSHOS_FAT16_SIGNATURE      0x29
 #define JOSHOS_FAT16_FAT_ENTRY_SIZE 0x02
@@ -120,11 +117,7 @@ struct fat_private
 
     //Used in situations where we can stream the directory
     struct disk_stream* directory_stream;
-<<<<<<< HEAD
-}
-=======
 };
->>>>>>> tmp
 
 int fat16_resolve(struct disk* disk);
 void* fat16_open(struct disk* disk, struct path_part* path, FILE_MODE mode);
@@ -141,11 +134,6 @@ struct filesystem* fat16_init()
     return &fat16_fs;
 }
 
-<<<<<<< HEAD
-int fat16_resolve(struct disk* disk)
-{
-    return 0;
-=======
 static void fat16_init_private(struct disk* disk, struct fat_private* private)
 {
     memset(private, 0, sizeof(struct fat_private));
@@ -295,7 +283,6 @@ out:
         disk->fs_private = 0;
     }
     return res;
->>>>>>> tmp
 }
 
 void* fat16_open(struct disk* disk, struct path_part* path, FILE_MODE mode)

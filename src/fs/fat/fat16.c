@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include "memory/memory.h"
 #include "memory/heap/kheap.h"
+#include "kernel.h"
 
 #define JOSHOS_FAT16_SIGNATURE      0x29
 #define JOSHOS_FAT16_FAT_ENTRY_SIZE 0x02
@@ -99,7 +100,7 @@ struct fat_item
     FAT_ITEM_TYPE type;
 };
 
-struct fat_item_descriptor
+struct fat_file_descriptor
 {
     struct fat_item* item;
     uint32_t pos;
@@ -285,7 +286,7 @@ out:
     return res;
 }
 
-void* fat16_open(struct disk* disk, struct path_part* path, FILE_MODE mode)
-{
+
+void* fat16_open(struct disk* disk, struct path_part* path, FILE_MODE mode){
     return 0;
 }

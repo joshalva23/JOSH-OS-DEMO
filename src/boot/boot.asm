@@ -58,7 +58,8 @@ gdt_start:
 gdt_null:
 	dd 0x0
 	dd 0x0
-; offset 0xB
+
+; offset 0x8
 gdt_code:       ;CS SHOULD POINT TO THIS
 	dw 0xffff	;Segment limit first 0-15 bits
 	dw 0		;BASE first 0-15 bits

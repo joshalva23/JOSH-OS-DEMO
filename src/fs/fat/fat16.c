@@ -10,14 +10,14 @@
 
 #define JOSHOS_FAT16_SIGNATURE      0x29
 #define JOSHOS_FAT16_FAT_ENTRY_SIZE 0x02
-#define JOSHOS_FAT16_BAD_SECTOR 0xFF7
-#define JOSHOS_FAT16_UNUSED     0x00
+#define JOSHOS_FAT16_BAD_SECTOR     0xFF7
+#define JOSHOS_FAT16_UNUSED         0x00
 
 typedef unsigned int FAT_ITEM_TYPE;
 #define FAT_ITEM_TYPE_DIRECTORY 0
 #define FAT_ITEM_TYPE_FILE      1
-//Fat directory entry attributes bitmask
 
+//Fat directory entry attributes bitmask
 #define FAT_FILE_READ_ONLY      0x01
 #define FAT_FILE_HIDDEN         0x02
 #define FAT_FILE_SYSTEM         0x04
@@ -97,6 +97,7 @@ struct fat_item
         struct fat_directory_item* item;
         struct fat_directory* directory;
     };
+
     FAT_ITEM_TYPE type;
 };
 
@@ -122,11 +123,13 @@ struct fat_private
 
 int fat16_resolve(struct disk* disk);
 void* fat16_open(struct disk* disk, struct path_part* path, FILE_MODE mode);
+int fat16_read(struct disk* disk, void* descriptor, uint32_t size, uint32_t nmemb, char* out_ptr);
 
 struct filesystem fat16_fs = 
 {
     .resolve = fat16_resolve,
-    .open = fat16_open
+    .open = fat16_open,
+    .read = fat16_read
 };
 
 struct filesystem* fat16_init()
@@ -145,7 +148,7 @@ static void fat16_init_private(struct disk* disk, struct fat_private* private)
 
 int fat16_sector_to_absolute(struct disk* disk, int sector)
 {
-    return sector * disk-> sector_size;
+    return sector * disk->sector_size;
 }
 
 int fat16_get_total_items_for_directory(struct disk* disk, uint32_t directory_start_sector)
@@ -173,6 +176,7 @@ int fat16_get_total_items_for_directory(struct disk* disk, uint32_t directory_st
             res = -EIO;
             goto out;
         }
+
         if(item.filename[0] == 0x00)
         {
             // We are done
@@ -184,7 +188,9 @@ int fat16_get_total_items_for_directory(struct disk* disk, uint32_t directory_st
         {
             continue;
         }
+
         i++;
+
     }
 
     res = i;
@@ -278,6 +284,7 @@ out:
     {
         diskstreamer_close(stream);
     }
+
     if(res < 0)
     {
         kfree(fat_private);
@@ -313,12 +320,13 @@ void fat16_get_full_relative_filename(struct fat_directory_item* item, char* out
         fat16_to_proper_string(&out_tmp, (const char*) item->ext);
     }
 }
+
 struct fat_directory_item* fat16_clone_directory_item(struct fat_directory_item* item, int size)
 {
     struct fat_directory_item* item_copy = 0;
     if(size < sizeof(struct fat_directory_item))
     {
-        return item_copy;
+        return 0;
     }
 
     item_copy = kzalloc(size);
@@ -334,7 +342,7 @@ struct fat_directory_item* fat16_clone_directory_item(struct fat_directory_item*
 
 static uint32_t fat16_get_first_cluster(struct fat_directory_item* item)
 {
-    return (item->high_16_bits_first_cluster) | (item->low_16_bits_first_cluster);
+    return (item->high_16_bits_first_cluster) | item->low_16_bits_first_cluster;
 }
 
 static int fat16_cluster_to_sector(struct fat_private* private, int cluster)
@@ -385,7 +393,7 @@ static int fat16_get_cluster_for_offset(struct disk* disk, int starting_cluster,
     int size_of_cluster_bytes = private->header.primary_header.sectors_per_cluster * disk->sector_size;
     int cluster_to_use = starting_cluster;
     int clusters_ahead = offset / size_of_cluster_bytes;
-    for(int i = 0; i< clusters_ahead; i++)
+    for(int i = 0; i < clusters_ahead; i++)
     {
         int entry = fat16_get_fat_entry(disk, cluster_to_use);
         if(entry == 0xFF8 || entry == 0xFFF)
@@ -437,10 +445,17 @@ static int fat16_read_internal_from_stream(struct disk* disk, struct disk_stream
     }
 
     int offset_from_cluster = offset % size_of_cluster_bytes;
+
     int starting_sector = fat16_cluster_to_sector(private, cluster_to_use);
-    int starting_pos = (starting_sector * disk->sector_size) * offset_from_cluster;
+    int starting_pos = (starting_sector * disk->sector_size) + offset_from_cluster;
     int total_to_read = total > size_of_cluster_bytes ? size_of_cluster_bytes : total;
     res = diskstreamer_seek(stream, starting_pos);
+    if(res != JOSHOS_ALL_OK)
+    {
+        goto out;
+    }
+
+    res = diskstreamer_read(stream, out, total_to_read);
     if(res != JOSHOS_ALL_OK)
     {
         goto out;
@@ -626,4 +641,26 @@ void* fat16_open(struct disk* disk, struct path_part* path, FILE_MODE mode)
     descriptor->pos = 0;
 
     return descriptor;
+}
+
+int fat16_read(struct disk* disk, void* descriptor, uint32_t size, uint32_t nmemb, char* out_ptr)
+{
+    int res = 0;
+    struct fat_file_descriptor* fat_desc = descriptor;
+    struct fat_directory_item* item = fat_desc->item->item;
+    int offset = fat_desc->pos;
+    for(uint32_t i = 0; i < nmemb; i++)
+    {
+        res = fat16_read_internal(disk, fat16_get_first_cluster(item), offset, size, out_ptr);
+        if(ISERR(res))
+        {
+            goto out;
+        }
+        out_ptr += size;
+        offset += size;
+
+    }
+    res = nmemb;
+out:
+    return res;
 }

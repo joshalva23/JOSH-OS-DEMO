@@ -1,5 +1,5 @@
-#ifndef STREAMER_H
-#define STREAMER_H
+#ifndef DISKSTREAMER_H
+#define DISKSTREAMER_H
 
 #include "disk.h"
 

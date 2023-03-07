@@ -91,7 +91,7 @@ void kernel_main()
     kernel_chunk = paging_new_4gb(PAGING_IS_WRITEABLE | PAGING_IS_PRESENT | PAGING_ACCESS_FROM_ALL);
 
     //switch to kernelpaging_chunk
-    paging_switch( paging_4gb_chunk_get_directory(kernel_chunk));
+    paging_switch( paging_4gb_chunk_get_directory(kernel_chunk) );
 
 
     //enable paging
@@ -101,10 +101,15 @@ void kernel_main()
     //Enable the system interrupts
     enable_interrupts(); 
 
-    int fd = fopen("0:/hello2.txt", "r");
+    int fd = fopen("0:/hello.txt", "r");
     if(fd)
     {
-        print("We opened hello2.txt\n");
+        print("\nWe opened hello.txt\n");
+        char buf[14];
+        fread(buf, 13, 1, fd);
+        buf[13] = 0x00;
+        print(buf);
+        print("\nDone");
     }
     while(1){}
 }

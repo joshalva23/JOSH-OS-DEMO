@@ -4,11 +4,14 @@
 #include "idt/idt.h"
 #include "memory/heap/kheap.h"
 #include "memory/paging/paging.h"
+#include "memory/memory.h"
 #include "disk/disk.h"
 #include "fs/pparser.h"
 #include "string/string.h"
 #include "disk/streamer.h"
 #include "fs/file.h"
+#include "gdt/gdt.h"
+#include "config.h"
 
 uint16_t* video_mem= 0;
 
@@ -78,11 +81,25 @@ void panic(const char* msg)
     while(1){}
 }
 
+struct gdt gdt_real[JOSHOS_TOTAL_GDT_SEGMENTS];
+struct gdt_structured gdt_structured[JOSHOS_TOTAL_GDT_SEGMENTS]= {
+    {.base = 0x00, .limit = 0x00, .type = 0x00}, //NULL SEGMENT
+    {.base = 0x00, .limit = 0xffffffff, .type = 0x9a},
+    {.base = 0x00, .limit = 0xffffffff, .type = 0x92}
+};
+
+
 void kernel_main()
 {
     
     terminal_initialize();
     print("hello world\ntest");
+    
+    memset(gdt_real, 0x00, sizeof(gdt_real));
+    gdt_structured_to_gdt(gdt_real, gdt_structured, JOSHOS_TOTAL_GDT_SEGMENTS);
+
+    //Load gdt
+    gdt_load(gdt_real, sizeof(gdt_real));
     
     kheap_init(); //Heap Initialize
 

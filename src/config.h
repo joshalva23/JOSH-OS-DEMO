@@ -19,4 +19,6 @@
 
 #define JOSHOS_MAX_PATH 108
 
+#define JOSHOS_TOTAL_GDT_SEGMENTS 3
+
 #endif

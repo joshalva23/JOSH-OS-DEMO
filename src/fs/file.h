@@ -24,7 +24,6 @@ struct disk;
 typedef void*(*FS_OPEN_FUNCTION)(struct disk* disk, struct path_part* path, FILE_MODE mode);
 typedef int (*FS_READ_FUNCTION)(struct disk* disk, void* private, uint32_t size, uint32_t nmemb, char* out);
 typedef int (*FS_RESOLVE_FUNCTION)(struct disk* disk);
-
 typedef int (*FS_SEEK_FUNCTION)(void* private, uint32_t offset, FILE_SEEK_MODE seek_mode);
 
 struct filesystem

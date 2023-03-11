@@ -1,0 +1,32 @@
+0000000000000000000000000000000000000000 0659b76eed7be4a2c5b9ca64e8911d45f2b47713 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1677411136 +0530	commit (initial): Staring from basic disc with ata controller
+0659b76eed7be4a2c5b9ca64e8911d45f2b47713 0659b76eed7be4a2c5b9ca64e8911d45f2b47713 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1677411413 +0530	Branch: renamed refs/heads/master to refs/heads/main
+0659b76eed7be4a2c5b9ca64e8911d45f2b47713 5b6531b052518377fa66c288e69f3d36f4e19be5 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1677421152 +0530	commit: improving disk driver
+5b6531b052518377fa66c288e69f3d36f4e19be5 11aaee5836cf04e9f3970395132ff1a7f8335472 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1677495071 +0530	commit: Creating a path parser
+11aaee5836cf04e9f3970395132ff1a7f8335472 efc9e856d32a3dd98b991e81688414b27ddf4617 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1677501628 +0530	commit: Creating a disk stream
+efc9e856d32a3dd98b991e81688414b27ddf4617 5dda31cc4babbb34adac424bb22db14c0c6ebec5 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1677506737 +0530	commit: START FAT16 creation
+5dda31cc4babbb34adac424bb22db14c0c6ebec5 5e8879d6ef2b0722850707e80e1e35daca07d614 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1677521854 +0530	commit: Implementing VFS core functionality
+5e8879d6ef2b0722850707e80e1e35daca07d614 5cb0aab9ae8fef5e777764800b928a2f63c1bcae joshalva23 <joshuaelias.cs21@rvce.edu.in> 1677605052 +0530	commit: Implementing FAT16 FS driver core functionality
+5cb0aab9ae8fef5e777764800b928a2f63c1bcae 8a547193280b4b0f56a6bcc3ca06af12fb2e7ad4 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1677680002 +0530	commit (merge): Implementing Fat16 resolver
+8a547193280b4b0f56a6bcc3ca06af12fb2e7ad4 8acd4ac320b3f5c90609b39daa6dfe9e788cb676 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1677680338 +0530	commit: Finally Fat16 resolver
+8acd4ac320b3f5c90609b39daa6dfe9e788cb676 0e2246383f0c5d897c43fd5ab5ce9491c70a61aa joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678112073 +0530	commit: Implementing VFS open function
+0e2246383f0c5d897c43fd5ab5ce9491c70a61aa c2d70f822bd476a6205d548393a8172c20e11088 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678113761 +0530	commit: Implementing FAT16 fopen function
+c2d70f822bd476a6205d548393a8172c20e11088 620d87f645b3f02ee29bdc541e14823a63581121 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678120041 +0530	commit: Implementing FAT16 open function
+620d87f645b3f02ee29bdc541e14823a63581121 b8953084f5c34addc91f6ef7c40d8f58dcad83dd joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678120528 +0530	commit: Implementing VFS fread function
+b8953084f5c34addc91f6ef7c40d8f58dcad83dd 5c1ffc19fb4047f9ef1d19cec079485aabacf351 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678196551 +0530	commit: Implementing FAT16 fread function
+5c1ffc19fb4047f9ef1d19cec079485aabacf351 3c1de0ddf7f594465cdc1c884a61e5516a8e448e joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678196906 +0530	commit: Implementing VFS fseek functionality
+3c1de0ddf7f594465cdc1c884a61e5516a8e448e 8b881ba9120d864fe5d9372068e0b6d15dfef911 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678197577 +0530	commit: Implementing FAT16 fseek functionality
+8b881ba9120d864fe5d9372068e0b6d15dfef911 9b674c9bf1af9b0422e200393699c8f4f077daea joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678206609 +0530	commit: Implementing VFS fstat functionality
+9b674c9bf1af9b0422e200393699c8f4f077daea 69c20c72b015a06e5df3b76ce81b88f1c86d64ec joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678207294 +0530	commit: Implementing FAT16 fstat functionality
+69c20c72b015a06e5df3b76ce81b88f1c86d64ec 0b3b9a079a02ba7ed4eeec912fe77c19aac605f4 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678207511 +0530	commit: Implementing VFS fclose functionality
+0b3b9a079a02ba7ed4eeec912fe77c19aac605f4 fca64050c65511d863302a52a59c0a6e7f714e7e joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678208167 +0530	commit: Implementing FAT16 fclose functionality
+fca64050c65511d863302a52a59c0a6e7f714e7e 5205f626611ee0d7c77500534e0a408d03340b3c joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678208426 +0530	commit: Implementing Kernel Panic
+5205f626611ee0d7c77500534e0a408d03340b3c e29cbee4f89fb1bf92a295c037097facbe3be6f2 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678211130 +0530	commit: Implementing GDT in C
+e29cbee4f89fb1bf92a295c037097facbe3be6f2 291615c278d601984621a6ed18c21fce5debda8c joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678220586 +0530	commit: Implementing the TSS
+291615c278d601984621a6ed18c21fce5debda8c f05ec451374ac4cce15795b266af4d35f5843450 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678261814 +0530	commit: Implementing task foundations
+f05ec451374ac4cce15795b266af4d35f5843450 5d5b062b9d065cf584ddebf38296362e5e5bf088 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678389423 +0530	commit: Implementing Process Foundations Part 1
+5d5b062b9d065cf584ddebf38296362e5e5bf088 7ac0c24c9fc550ed305ccb24da06ab128f8183a7 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678456110 +0530	commit: Implementing User Land Functionality
+7ac0c24c9fc550ed305ccb24da06ab128f8183a7 b34d6947fa1b9788c1105ef0f5b33d809d201e71 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678464802 +0530	commit: Creating our first user process application
+b34d6947fa1b9788c1105ef0f5b33d809d201e71 df72b67ffdf03ec81736e0862c8c7aeb34454e11 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678466072 +0530	commit: Executing the process and dropping into userland
+df72b67ffdf03ec81736e0862c8c7aeb34454e11 aeac592367775ea3912444d3803c8a00c24d2986 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678466798 +0530	commit: Changing the paging functionality
+aeac592367775ea3912444d3803c8a00c24d2986 e1cae929805bd2ebb1eaa56473bc2c86111fc4c3 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678479277 +0530	commit: Creating interrupt 0x80 for user process to kernel communication
+e1cae929805bd2ebb1eaa56473bc2c86111fc4c3 c3b3f5eaa630e7f37fc51573bc685c332b74ad08 joshalva23 <joshuaelias.cs21@rvce.edu.in> 1678483872 +0530	commit: Creating ability to create and execute kernel commands

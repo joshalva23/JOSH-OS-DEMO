@@ -100,7 +100,7 @@ struct gdt_structured gdt_structured[JOSHOS_TOTAL_GDT_SEGMENTS]= {
     {.base = 0x00, .limit = 0xffffffff, .type = 0x92},  //Kernel data segment
     {.base = 0x00, .limit = 0xffffffff, .type = 0xf8},   //user code segment
     {.base = 0x00, .limit = 0xffffffff, .type = 0xf2},   //user data segment
-    {.base = (uint32_t)&tss, .limit = sizeof(tss), .type = 0xE9},    //TSS segment
+    {.base = (uint32_t)(&tss), .limit = sizeof(tss), .type = 0xE9},    //TSS segment
 };
 
 
@@ -108,7 +108,6 @@ void kernel_main()
 {
     
     terminal_initialize();
-    print("hello world\ntest");
     
     memset(gdt_real, 0x00, sizeof(gdt_real));
     gdt_structured_to_gdt(gdt_real, gdt_structured, JOSHOS_TOTAL_GDT_SEGMENTS);
